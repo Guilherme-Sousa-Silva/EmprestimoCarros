@@ -62,6 +62,23 @@ namespace EmprestimoCarros.API.Data.Mappings
 				.HasColumnName("Email") // Nome da coluna
 				.HasColumnType("NVARCHAR") // Tipo de dados
 				.HasMaxLength(50); // Maximo de caracteres
+
+			// Relacionamentos 
+			builder.HasMany(x => x.Cars)
+				.WithMany(x => x.Customers)
+				.UsingEntity<Dictionary<string, object>>(
+					"CustomerLendingCar",
+					customer => customer.HasOne<Car>()
+						.WithMany()
+						.HasForeignKey("CustomerId")
+						.HasConstraintName("FK_CustomerLendingCar_CustomerId")
+						.OnDelete(DeleteBehavior.Cascade),
+					car => car.HasOne<Customer>()
+						.WithMany()
+						.HasForeignKey("CarId")
+						.HasConstraintName("FK_CustomerLendingCar_CarId")
+						.OnDelete(DeleteBehavior.Cascade)
+				);
 		}
 	}
 }

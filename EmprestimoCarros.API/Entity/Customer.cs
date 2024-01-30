@@ -2,7 +2,18 @@
 {
 	public class Customer
 	{
-        public int Id { get; set; }
+		public Customer(string name, string document, string street, string city, string number, string phoneNumber, string email)
+		{
+			Name = name;
+			Document = document;
+			Street = street;
+			City = city;
+			Number = number;
+			PhoneNumber = phoneNumber;
+			Email = email;
+		}
+
+		public int Id { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }
 		public string Street { get; set; }
