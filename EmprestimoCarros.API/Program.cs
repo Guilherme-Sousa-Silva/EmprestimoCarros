@@ -1,8 +1,5 @@
-using EmprestimoCarros.API.Data;
-using EmprestimoCarros.API.Interfaces;
-using EmprestimoCarros.API.Repositories;
-using EmprestimoCarros.API.Repositories.Car;
-using Microsoft.EntityFrameworkCore;
+using EmprestimoCarros.API.Mappings;
+using EmprestimoCarros.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +9,8 @@ ConfigureServices(builder);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+builder.Services.AddInfrastructureSwagger();
 
 var app = builder.Build();
 
@@ -33,12 +31,9 @@ app.Run();
 
 void ConfigureServices(WebApplicationBuilder builder)
 {
-	var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-	builder.Services.AddDbContext<Context>(options =>
-	{
-		options.UseSqlServer(connectionString);
-	});
+	builder.Services.AddInfrastructure(builder.Configuration);
+	//builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+	//builder.Services.AddScoped<ICarRepository, CarRepository>();
+	builder.Services.AddAutoMapper(typeof(EntitiesToDtoMappingProfile));
 
-	builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-	builder.Services.AddScoped<ICarRepository, CarRepository>();
 }

@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoCarros.API", "EmprestimoCarros.API\EmprestimoCarros.API.csproj", "{2FDF1DC8-4A47-4068-8DDA-2113C362B989}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoCarros.API", "EmprestimoCarros.API\EmprestimoCarros.API.csproj", "{2FDF1DC8-4A47-4068-8DDA-2113C362B989}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoCarros.Domain", "EmprestimoCarros.Domain\EmprestimoCarros.Domain.csproj", "{1914D2C6-EBF1-4654-8E08-9A48DB3BE1BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoCarros.Infra.Data", "EmprestimoCarros.Infra.Data\EmprestimoCarros.Infra.Data.csproj", "{355943B6-D796-4666-A0A3-2F8C0E9EFF17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoCarros.Infra.Ioc", "EmprestimoCarros.Infra.Ioc\EmprestimoCarros.Infra.Ioc.csproj", "{5A2178F2-032A-431F-BA66-0DC486019A4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoCarros.Application", "EmprestimoCarros.Application\EmprestimoCarros.Application.csproj", "{8D3C1E74-493B-4C88-91B7-8945D9D83A59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{2FDF1DC8-4A47-4068-8DDA-2113C362B989}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FDF1DC8-4A47-4068-8DDA-2113C362B989}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FDF1DC8-4A47-4068-8DDA-2113C362B989}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1914D2C6-EBF1-4654-8E08-9A48DB3BE1BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1914D2C6-EBF1-4654-8E08-9A48DB3BE1BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1914D2C6-EBF1-4654-8E08-9A48DB3BE1BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1914D2C6-EBF1-4654-8E08-9A48DB3BE1BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{355943B6-D796-4666-A0A3-2F8C0E9EFF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{355943B6-D796-4666-A0A3-2F8C0E9EFF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{355943B6-D796-4666-A0A3-2F8C0E9EFF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{355943B6-D796-4666-A0A3-2F8C0E9EFF17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A2178F2-032A-431F-BA66-0DC486019A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A2178F2-032A-431F-BA66-0DC486019A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A2178F2-032A-431F-BA66-0DC486019A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A2178F2-032A-431F-BA66-0DC486019A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D3C1E74-493B-4C88-91B7-8945D9D83A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D3C1E74-493B-4C88-91B7-8945D9D83A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D3C1E74-493B-4C88-91B7-8945D9D83A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D3C1E74-493B-4C88-91B7-8945D9D83A59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

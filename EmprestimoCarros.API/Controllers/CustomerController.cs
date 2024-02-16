@@ -1,6 +1,8 @@
-﻿using EmprestimoCarros.API.Entity;
+﻿using AutoMapper;
+using EmprestimoCarros.API.DTOs;
+using EmprestimoCarros.API.DTOs.CustomerDTOs;
 using EmprestimoCarros.API.Interfaces;
-using EmprestimoCarros.API.Models;
+using EmprestimoCarros.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoCarros.API.Controllers
@@ -9,68 +11,78 @@ namespace EmprestimoCarros.API.Controllers
 	[Route("api/customer")]
 	public class CustomerController : ControllerBase
 	{
-		private readonly ICustomerRepository _customerRepository;
+		private readonly ICustomerService _customerService;
+		private readonly IMapper _mapper;
 
-        public CustomerController(ICustomerRepository customerRepository)
-        {
-			_customerRepository = customerRepository;
+		public CustomerController(ICustomerService customerService, IMapper mapper)
+		{
+			_customerService = customerService;
+			_mapper = mapper;
 
 		}
 
-        [HttpGet("get-by/{id:int}")]
+		[HttpGet("get-by/{id:int}")]
 		public async Task<IActionResult> Get(
 			[FromRoute] int id)
 		{
-			var customer = await _customerRepository.GetById(id);
+			var customer = await _customerService.GetById(id);
 
 			if (customer == null)
 			{
 				return NotFound($"Cliente não encontrado pelo Id {id}");
 			}
 
-			return Ok(await _customerRepository.GetById(id));
+			return Ok(customer);
 		}
 
 		[HttpGet("get-all")]
-		public async Task<ActionResult<IList<Entity.Customer>>> GetAll()
+		public async Task<ActionResult<IList<CustomerDTO>>> GetAll()
 		{
-			return Ok(await _customerRepository.GetAll());
+			var customers = await _customerService.GetAll();
+
+			return Ok(customers);
 		}
 
 		[HttpPost("create")]
 		public async Task<IActionResult> Create(
-			[FromBody] CustomerModel customer)
+			[FromBody] CustomerDTO customerDto)
 		{
-			return Ok(await _customerRepository.Create(customer));
-		}
-
-		[HttpPut("edit/{id:int}")]
-		public async Task<IActionResult> Edit(
-			[FromRoute] int id,
-			[FromBody] CustomerModel model)
-		{
-			var customer = await _customerRepository.GetById(id);
+			var customer = await _customerService.Create(customerDto);
 
 			if (customer == null)
 			{
-				return NotFound($"Cliente não encontrado pelo Id {id}");
+				return BadRequest("Ocorreu um erro ao incluir o cliente!");
 			}
 
-			return Ok(await _customerRepository.Update(id, model));
+			return Ok(customer);
+		}
+
+		[HttpPut("edit")]
+		public async Task<IActionResult> Edit(
+			[FromBody] CustomerDTO customerDto)
+		{
+			var customer = await _customerService.GetById(customerDto.Id);
+
+			if (customer == null)
+			{
+				return NotFound($"Cliente não encontrado pelo Id {customerDto.Id}");
+			}
+
+			return Ok(await _customerService.Update(customerDto));
 		}
 
 		[HttpDelete("delete/{id:int}")]
 		public async Task<IActionResult> Delete(
 			[FromRoute] int id)
 		{
-			var customer = await _customerRepository.GetById(id);
+			var customer = await _customerService.GetById(id);
 
 			if (customer == null)
 			{
 				return NotFound($"Cliente não encontrado pelo Id {id}");
 			}
 
-			return Ok(await _customerRepository.Delete(id));
+			return Ok(await _customerService.Delete(id));
 		}
 	}
 }
