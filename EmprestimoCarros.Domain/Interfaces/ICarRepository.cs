@@ -7,7 +7,7 @@ namespace EmprestimoCarros.API.Interfaces
 		Task<Car> GetById(int id);
 		Task<IList<Car>> GetAll();
 		Task<Car> Create(Car car);
-		Task<Car> Update(int id, Car car);
-		Task<string> Delete(int id);
+		Task<Car> Update(Car car);
+		Task Delete(int id);
 	}
 }

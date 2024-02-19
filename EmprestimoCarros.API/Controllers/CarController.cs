@@ -1,76 +1,68 @@
-﻿//using EmprestimoCarros.API.Entity;
-//using EmprestimoCarros.API.Interfaces;
-//using EmprestimoCarros.API.Models;
-//using Microsoft.AspNetCore.Mvc;
+﻿using EmprestimoCarros.API.Interfaces;
+using EmprestimoCarros.Application.DTOs.CarDTOs;
+using EmprestimoCarros.Application.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
-//namespace EmprestimoCarros.API.Controllers
-//{
-//	[ApiController]
-//	[Route("api/car")]
-//	public class CarController : ControllerBase
-//	{
-//		private readonly ICarRepository _carRepository;
+namespace EmprestimoCarros.API.Controllers
+{
+	[ApiController]
+	[Route("api/car")]
+	public class CarController : ControllerBase
+	{
+		private readonly ICarService _carService;
 
-//        public CarController(ICarRepository carRepository)
-//        {
-//			_carRepository = carRepository;
+		public CarController(ICarService carService)
+		{
+			_carService = carService;
 
-//		}
+		}
 
-//		[HttpGet("{id:int}")]
-//		public async Task<IActionResult> Get(
-//			[FromRoute] int id)
-//		{
-//			var car = await _carRepository.GetById(id);
+		[HttpGet("{id:int}")]
+		public async Task<IActionResult> Get(
+			[FromRoute] int id)
+		{
+			var car = await _carService.GetById(id);
 
-//			if(car == null)
-//			{
-//				return NotFound($"Carro não encontrado pelo Id {id}");
-//			}
+			if (car == null)
+			{
+				return NotFound($"Carro não encontrado pelo Id {id}");
+			}
 
-//			return Ok(car);
-//		}
+			return Ok(car);
+		}
 
-//		[HttpGet("get-all")]
-//		public async Task<ActionResult<IList<Car>>> GetAll()
-//		{
-//			return Ok(await _carRepository.GetAll());
-//		}
+		[HttpGet("get-all")]
+		public async Task<ActionResult<IList<CarDTO>>> GetAll()
+		{
+			return Ok(await _carService.GetAll());
+		}
 
-//		[HttpPost("create")]
-//		public async Task<IActionResult> Create(
-//			[FromRoute] CarModel model)
-//		{
-//			return Ok( await _carRepository.Create(model));
-//		}
+		[HttpPost("create")]
+		public async Task<IActionResult> Create(
+			[FromRoute] CarDTO carDto)
+		{
+			return Ok(await _carService.Create(carDto));
+		}
 
-//		[HttpPut("edit/{id:int}")]
-//		public async Task<IActionResult> Edit(
-//			[FromRoute] int id,
-//			[FromBody] CarModel model)
-//		{
-//			var car = await _carRepository.GetById(id);
+		[HttpPut("edit")]
+		public async Task<IActionResult> Edit(
+			[FromBody] CarDTO carDto)
+		{
+			return Ok(await _carService.Update(carDto));
+		}
 
-//			if (car == null)
-//			{
-//				return NotFound($"Carro não encontrado com o Id {id}");
-//			}
+		[HttpPut("delete/{id:int}")]
+		public async Task<IActionResult> Delete(
+			[FromRoute] int id)
+		{
+			var car = await _carService.GetById(id);
 
-//			return Ok(await _carRepository.Update(id, model));
-//		}
+			if (car == null)
+			{
+				return NotFound($"Carro não encontrado com o Id {id}");
+			}
 
-//		[HttpPut("delete/{id:int}")]
-//		public async Task<IActionResult> Delete(
-//			[FromRoute] int id)
-//		{
-//			var car = await _carRepository.GetById(id);
-
-//			if (car == null)
-//			{
-//				return NotFound($"Carro não encontrado com o Id {id}");
-//			}
-
-//			return Ok(await _carRepository.Delete(id));
-//		}
-//	}
-//}
+			return Ok( await _carService.Delete(id));
+		}
+	}
+}
