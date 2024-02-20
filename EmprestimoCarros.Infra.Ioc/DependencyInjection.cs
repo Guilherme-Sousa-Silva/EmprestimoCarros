@@ -54,11 +54,15 @@ namespace EmprestimoCarros.Infra.Ioc
 			// Repositories
 			services.AddScoped<ICustomerRepository, CustomerRepository>();
 			services.AddScoped<IUserRepository, UserRepository>();
+			services.AddScoped<ICarRepository, CarRepository>();
+			services.AddScoped<ILendingRepository, LendingRepository>();
 
 			// Services
 			services.AddScoped<ICustomerService, CustomerService>();
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<IAuthenticate, AuthenticateService>();
+			services.AddScoped<ICarService, CarService>();
+			services.AddScoped<ILendingService, LendingService>();
 
 			return services;
 		}

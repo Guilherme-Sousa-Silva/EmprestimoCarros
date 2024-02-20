@@ -36,8 +36,8 @@ namespace EmprestimoCarros.Infra.Data.EntitiesConfiguration
 			builder.Property(x => x.Year)
 				.IsRequired() // NOT NULL
 				.HasColumnName("Year") // Nome da coluna
-				.HasColumnType("SMALLDATETIME") // Tipo de dados
-				.HasDefaultValueSql("GETDATE()"); // Configura como valor padrão a data atual
+				.HasColumnType("VARCHAR") // Tipo de dados
+				.HasMaxLength(50); // Maximo de caracteres
 		}
 	}
 }

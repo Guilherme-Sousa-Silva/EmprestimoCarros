@@ -39,7 +39,7 @@ namespace EmprestimoCarros.API.Controllers
 
 		[HttpPost("create")]
 		public async Task<IActionResult> Create(
-			[FromRoute] CarDTO carDto)
+			[FromBody] CarDTO carDto)
 		{
 			return Ok(await _carService.Create(carDto));
 		}
@@ -51,7 +51,7 @@ namespace EmprestimoCarros.API.Controllers
 			return Ok(await _carService.Update(carDto));
 		}
 
-		[HttpPut("delete/{id:int}")]
+		[HttpDelete("delete/{id:int}")]
 		public async Task<IActionResult> Delete(
 			[FromRoute] int id)
 		{
